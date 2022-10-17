@@ -6,10 +6,15 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float crouchSpeed = 0.4f;
+    [SerializeField] private float movementSpoothing = 0.05f;
     [SerializeField] private Transform groundedPoint;
+    [SerializeField] private Transform ceilingPoint;
     [SerializeField] private LayerMask groundLayer;
 
     private Rigidbody2D rb;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     private bool isGrounded;
     private bool canDoubleJump;
@@ -17,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -46,5 +53,18 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+        if (rb.velocity.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+
+        else if (rb.velocity.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+
+        animator.SetFloat("moveSpeed", Mathf.Abs(rb.velocity.x));
+        animator.SetBool("isGrounded", isGrounded);
     }
 }
