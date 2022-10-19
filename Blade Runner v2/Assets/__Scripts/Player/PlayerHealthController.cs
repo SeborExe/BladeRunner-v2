@@ -41,4 +41,9 @@ public class PlayerHealthController : MonoBehaviour
     {
         return currentHealth;
     }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
 }

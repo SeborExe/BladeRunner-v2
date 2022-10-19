@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,43 +8,179 @@ public class UIController : MonoBehaviour
 {
     public static UIController Instance;
 
-    [SerializeField] Image[] hearths;
-    [SerializeField] Sprite fullHealth, emptyHealth;
+    [SerializeField] RectTransform hearthBar;
+    [SerializeField] GameObject hearthPrefab;
+    [SerializeField] Sprite fullHealth, emptyHealth, halfHearth;
+
+    private List<Image> hearths = new List<Image>();
 
     private void Awake()
     {
         Instance = this;
     }
 
+    private void Start()
+    {
+        InstantiatePlayerHearth();
+        UpdateHealthDisplay();
+    }
+
+    private void InstantiatePlayerHearth()
+    {
+        foreach (Transform child in hearthBar.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        int hearthNumber = PlayerHealthController.Instance.GetMaxHealth();
+
+        if (hearthNumber % 2 == 0)
+        {
+            int NumberOfHearts = hearthNumber / 2;
+            for (int i = 0; i < NumberOfHearts; i++)
+            {
+                GameObject heart = Instantiate(hearthPrefab, hearthBar.transform);
+
+                heart.transform.SetParent(hearthBar);
+                heart.GetComponent<RectTransform>().anchoredPosition = new Vector2(i * 110f, 0);
+
+                Image hearthImage = heart.GetComponent<Image>();
+                hearths.Add(hearthImage);
+            }
+        }
+        else
+        {
+            int NumberOfHearts = (int)Mathf.Ceil((float)hearthNumber / 2);
+            for (int i = 0; i < NumberOfHearts; i++)
+            {
+                GameObject heart = Instantiate(hearthPrefab, hearthBar.transform);
+
+                heart.transform.SetParent(hearthBar);
+                heart.GetComponent<RectTransform>().anchoredPosition = new Vector2(i * 110f, 0);
+
+                Image hearthImage = heart.GetComponent<Image>();
+                hearths.Add(hearthImage);
+            }
+        }
+    }
+
     public void UpdateHealthDisplay()
     {
         switch(PlayerHealthController.Instance.GetCurrentHealth())
         {
-            case 3:
-                for (int i = 0; i < hearths.Length; i++)
+            case 6:
+                for (int i = 0; i < hearths.Count; i++)
                 {
-                    hearths[i].sprite = fullHealth;
+                    if (i == 0 || i == 1 || i == 2)
+                    {
+                        hearths[i].sprite = fullHealth;
+                        continue;
+                    }
+                    else
+                    {
+                        hearths[i].sprite = emptyHealth;
+                        continue;
+                    }
+                }
+                break;
+
+            case 5:
+                for (int i = 0; i < hearths.Count; i++)
+                {
+                    if (i == 0 || i == 1)
+                    {
+                        hearths[i].sprite = fullHealth;
+                        continue;
+                    }
+
+                    if (i == 2)
+                    {
+                        hearths[i].sprite = halfHearth;
+                        continue;
+                    }
+                    else
+                    {
+                        hearths[i].sprite = emptyHealth;
+                        continue;
+                    }
+                }
+                break;
+
+            case 4:
+                for (int i = 0; i < hearths.Count; i++)
+                {
+                    if (i == 0 || i == 1)
+                    {
+                        hearths[i].sprite = fullHealth;
+                        continue;
+                    }
+                    else
+                    {
+                        hearths[i].sprite = emptyHealth;
+                        continue;
+                    }
+                }
+                break;
+
+            case 3:
+                for (int i = 0; i < hearths.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        hearths[i].sprite = fullHealth;
+                        continue;
+                    }
+
+                    if (i == 1)
+                    {
+                        hearths[i].sprite = halfHearth;
+                        continue;
+                    }
+                    else
+                    {
+                        hearths[i].sprite = emptyHealth;
+                        continue;
+                    }
                 }
                 break;
 
             case 2:
-                for (int i = 0; i < hearths.Length - 1; i++)
+                for (int i = 0; i < hearths.Count; i++)
                 {
-                    hearths[i].sprite = fullHealth;
+                    if (i == 0)
+                    {
+                        hearths[i].sprite = fullHealth;
+                        continue;
+                    }
+                    else
+                    {
+                        hearths[i].sprite = emptyHealth;
+                        continue;
+                    }
                 }
-                hearths[2].sprite = emptyHealth;
                 break;
 
             case 1:
-                hearths[0].sprite = fullHealth;
-                hearths[1].sprite = emptyHealth;
-                hearths[2].sprite = emptyHealth;
+                for (int i = 0; i < hearths.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        hearths[i].sprite = halfHearth;
+                        continue;
+                    }
+                    else
+                    {
+                        hearths[i].sprite = emptyHealth;
+                        continue;
+                    }
+                }
                 break;
 
             default:
-                for (int i = 0; i < hearths.Length; i++)
+                for (int i = 0; i < hearths.Count; i++)
                 {
                     hearths[i].sprite = emptyHealth;
+                    continue;
                 }
                 break;
         }
