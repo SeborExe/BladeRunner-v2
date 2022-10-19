@@ -4648,9 +4648,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1165853731585072933, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1165853731585072934, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165853731585072941, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
+      propertyPath: knockBackForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165853731585072941, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
+      propertyPath: knockBackForceX
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165853731585072941, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
+      propertyPath: knockBackForceY
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165853731585072941, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
+      propertyPath: knockBackLength
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
@@ -4678,6 +4698,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
+  invincibleLength: 1
 --- !u!1 &474263817
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class DamagePlayer : MonoBehaviour
         if (collision.TryGetComponent<PlayerHealthController>(out PlayerHealthController playerHealth))
         {
             playerHealth.TakeDamage(damage);
+            playerHealth.GetComponent<PlayerMovement>().KnockBack();
         } 
     }
 }

@@ -9,10 +9,20 @@ public class PlayerHealthController : MonoBehaviour
 
     [SerializeField] int maxHealth = 3;
     [SerializeField] int currentHealth;
+    [SerializeField] float invincibleLength = 1f;
+
+    private SpriteRenderer spriteRenderer;
+
+    private float invincibleTimer;
+    private Coroutine immunityCoroutine;
+    private const float spriteFlashInterval = 0.1f;
+    private WaitForSeconds WaitForSecondsSpriteFlashInterfal = new WaitForSeconds(spriteFlashInterval);
 
     private void Awake()
     {
         Instance = this;
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -20,8 +30,15 @@ public class PlayerHealthController : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    private void Update()
+    {
+        UpdateTimers();
+    }
+
     public void TakeDamage(int amount = 1)
     {
+        if (invincibleTimer > 0) return;
+
         currentHealth -= amount;
         UIController.Instance.UpdateHealthDisplay();
 
@@ -30,11 +47,51 @@ public class PlayerHealthController : MonoBehaviour
             currentHealth = 0;
             Die();
         }
+        else
+        {
+            invincibleTimer = invincibleLength;
+            PostHitImmunity();
+        }
     }
 
     private void Die()
     {
         gameObject.SetActive(false);
+    }
+
+    private void UpdateTimers()
+    {
+        if (invincibleTimer > 0)
+        {
+            invincibleTimer -= Time.deltaTime;
+            if (invincibleTimer <= 0)
+            {
+                invincibleTimer = 0;
+            }
+        }
+    }
+
+    private void PostHitImmunity()
+    {
+        if (immunityCoroutine != null)
+            StopCoroutine(immunityCoroutine);
+
+        immunityCoroutine = StartCoroutine(PostHitImmunityRoutine(invincibleLength, spriteRenderer));
+    }
+
+    private IEnumerator PostHitImmunityRoutine(float immuneTime, SpriteRenderer spriteRenderer)
+    {
+        int iterations = Mathf.RoundToInt(immuneTime / spriteFlashInterval / 2f);
+
+        while (iterations > 0)
+        {
+            spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0.5f);
+            yield return WaitForSecondsSpriteFlashInterfal;
+            spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1f);
+            yield return WaitForSecondsSpriteFlashInterfal;
+            iterations--;
+            yield return null;
+        }
     }
 
     public int GetCurrentHealth()

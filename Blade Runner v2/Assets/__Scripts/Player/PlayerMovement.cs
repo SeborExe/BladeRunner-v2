@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,14 @@ public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
     private Animator animator;
+    private Rigidbody2D rb;
 
     [SerializeField] private float moveSpeed = 40f;
+    [SerializeField] private float knockBackLength;
+    [SerializeField] private float knockBackForceX;
+    [SerializeField] private float knockBackForceY;
 
+    private float knockBackTimer;
     private float horizontalMove;
     private bool canDoubleJump;
     private bool crouch;
@@ -19,8 +25,17 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        rb = controller.rb;
+    }
+
     private void Update()
     {
+        UpdateTimers();
+
+        if (knockBackTimer > 0) return;
+
         HandleMoving();
 
         HandleJumping();
@@ -46,13 +61,13 @@ public class PlayerMovement : MonoBehaviour
         {
             if (controller.GetIsGrounded())
             {
-                controller.rb.velocity = new Vector2(controller.rb.velocity.x, controller.GetJumpForce());
+                rb.velocity = new Vector2(rb.velocity.x, controller.GetJumpForce());
             }
             else
             {
                 if (canDoubleJump)
                 {
-                    controller.rb.velocity = new Vector2(controller.rb.velocity.x, controller.GetJumpForce());
+                    rb.velocity = new Vector2(rb.velocity.x, controller.GetJumpForce());
                     canDoubleJump = false;
                 }
             }
@@ -86,5 +101,34 @@ public class PlayerMovement : MonoBehaviour
     public void OnCrouching(bool isCrouching)
     {
         animator.SetBool("isCrouching", isCrouching);
+    }
+
+    private void UpdateTimers()
+    {
+        if (knockBackTimer > 0)
+        {
+            if (controller.GetFacingDirection())
+            {
+                //rb.velocity = new Vector2(-knockBackForce, rb.velocity.y);
+                rb.AddRelativeForce(new Vector2(-knockBackForceX, knockBackForceY));
+            }
+            else
+            {
+                //rb.velocity = new Vector2(knockBackForce, rb.velocity.y);
+                rb.AddRelativeForce(new Vector2(knockBackForceX, knockBackForceY));
+            }
+
+            knockBackTimer -= Time.deltaTime;
+            if (knockBackTimer < 0)
+            {
+                knockBackTimer = 0;
+            }
+        }
+    }
+
+    public void KnockBack()
+    {
+        knockBackTimer = knockBackLength;
+        rb.velocity = new Vector2(0f, rb.velocity.y);
     }
 }

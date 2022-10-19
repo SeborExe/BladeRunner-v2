@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 47
+  controlID: 73
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 103
+  controlID: 82
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 104
+  controlID: 83
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -215,8 +215,8 @@ MonoBehaviour:
     y: 0
     width: 833.6
     height: 432.8
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 15}
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -243,15 +243,15 @@ MonoBehaviour:
     y: 432.8
     width: 1109.6
     height: 298
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 17}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 17}
   - {fileID: 18}
   - {fileID: 19}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -437,9 +437,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ae93ffff
-      m_LastClickedID: -27730
-      m_ExpandedIDs: 848cffffd492ffffae93ffffa6d7ffff1adfffffe2e0ffff86f3ffff62f9ffff0cfbffff3c730000
+      m_SelectedIDs: f46c0000
+      m_LastClickedID: 27892
+      m_ExpandedIDs: 0cfbffffe46c0000f46c0000f86c0000226d0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -774,9 +774,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 352.86823, y: 958.8523, z: 1.8473439}
+    m_Target: {x: 709.07324, y: 505.18478, z: 6.4376473}
     speed: 2
-    m_Value: {x: 352.86823, y: 958.8523, z: 1.8473439}
+    m_Value: {x: 709.07324, y: 505.18478, z: 6.4376473}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -827,9 +827,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 903.36926
+    m_Target: 699.54535
     speed: 2
-    m_Value: 903.36926
+    m_Value: 699.54535
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -895,22 +895,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/__Scripts/UI
+    - Assets/_prefabs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/__Scripts/UI
+  - Assets/_prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\UnityGamesProject\BladeRunner-v2\Blade Runner v2
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 59}
-    m_SelectedIDs: a09f0000
-    m_LastClickedID: 40864
-    m_ExpandedIDs: 000000000e6f0000106f0000126f0000166f00008e7000009470000000ca9a3b
+    m_SelectedIDs: 46700000
+    m_LastClickedID: 28742
+    m_ExpandedIDs: 0000000036700000387000003a7000003c7000003e7000004470000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -938,7 +938,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000000e6f0000106f0000126f0000146f0000166f0000
+    m_ExpandedIDs: 0000000036700000387000003a7000003c7000003e700000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -963,8 +963,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: e46c0000
+    m_LastClickedInstanceID: 27876
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300008c7700009a6d0000f2850000
     m_RenameOverlay:
@@ -1052,7 +1052,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -27730
+  m_LastSelectedObjectID: 27892
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
