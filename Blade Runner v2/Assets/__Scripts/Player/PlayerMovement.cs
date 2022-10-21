@@ -130,5 +130,7 @@ public class PlayerMovement : MonoBehaviour
     {
         knockBackTimer = knockBackLength;
         rb.velocity = new Vector2(0f, rb.velocity.y);
+
+        animator.SetTrigger("hurt");
     }
 }
