@@ -131,4 +131,9 @@ public class CharacterController : MonoBehaviour
     {
 		return jumpForce;
     }
+
+	public bool GetFacingDirection()
+    {
+		return facingRight;
+    }
 }
