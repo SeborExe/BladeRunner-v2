@@ -8,9 +8,16 @@ public class CheckPointManager : MonoBehaviour
 
     [SerializeField] private List<CheckPoint> checkpoints = new List<CheckPoint>();
 
+    private Vector3 spawnPoint;
+
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        spawnPoint = PlayerHealthController.Instance.transform.position + Vector3.up;
     }
 
     public void AddCheckPoint(CheckPoint checkPoint)
@@ -24,5 +31,15 @@ public class CheckPointManager : MonoBehaviour
         {
             checkPoint.ResetCheckPoint();
         }
+    }
+
+    public void SetSpawnPoint(Vector3 spawnPoint)
+    {
+        this.spawnPoint = spawnPoint;
+    }
+
+    public Vector3 GetSpawnPoint()
+    {
+        return spawnPoint;
     }
 }

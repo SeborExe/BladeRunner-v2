@@ -24,6 +24,8 @@ public class CheckPoint : MonoBehaviour
         {
             CheckPointManager.Instance.DeactivateCheckPoints();
             spriteRenderer.sprite = CheckPointOn;
+
+            CheckPointManager.Instance.SetSpawnPoint(transform.position + Vector3.up);
         }
     }
 

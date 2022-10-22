@@ -18,6 +18,8 @@ public class PlayerHealthController : MonoBehaviour
     private const float spriteFlashInterval = 0.1f;
     private WaitForSeconds WaitForSecondsSpriteFlashInterfal = new WaitForSeconds(spriteFlashInterval);
 
+    public event Action OnDie;
+
     private void Awake()
     {
         Instance = this;
@@ -28,6 +30,16 @@ public class PlayerHealthController : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+    }
+
+    private void OnEnable()
+    {
+        OnDie += Die;
+    }
+
+    private void OnDisable()
+    {
+        OnDie -= Die;
     }
 
     private void Update()
@@ -45,7 +57,7 @@ public class PlayerHealthController : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            Die();
+            OnDie?.Invoke();
         }
         else
         {
@@ -56,7 +68,7 @@ public class PlayerHealthController : MonoBehaviour
 
     private void Die()
     {
-        gameObject.SetActive(false);
+        GameManager.Instance.RespawnPlayer();
     }
 
     private void UpdateTimers()
@@ -102,5 +114,10 @@ public class PlayerHealthController : MonoBehaviour
     public int GetMaxHealth()
     {
         return maxHealth;
+    }
+
+    public void SetCurrentHealth(int amount)
+    {
+        currentHealth = amount;
     }
 }
