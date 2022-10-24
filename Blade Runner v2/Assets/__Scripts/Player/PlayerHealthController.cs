@@ -10,6 +10,7 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField] int maxHealth = 3;
     [SerializeField] int currentHealth;
     [SerializeField] float invincibleLength = 1f;
+    [SerializeField] GameObject deathEffect;
 
     private SpriteRenderer spriteRenderer;
 
@@ -74,6 +75,7 @@ public class PlayerHealthController : MonoBehaviour
 
     private void Die()
     {
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
         GameManager.Instance.RespawnPlayer();
     }
 

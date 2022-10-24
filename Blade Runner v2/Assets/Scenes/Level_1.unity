@@ -4884,29 +4884,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1165853731585072933, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1165853731585072934, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1165853731585072941, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
-      propertyPath: knockBackForce
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1165853731585072941, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
-      propertyPath: knockBackForceX
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1165853731585072941, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
-      propertyPath: knockBackForceY
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1165853731585072941, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
-      propertyPath: knockBackLength
-      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
@@ -4915,26 +4895,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1165853731585072932, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
   m_PrefabInstance: {fileID: 438994258}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &438994260 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1165853731585072934, guid: 319851f9178aedd45aedaa0109461a7e, type: 3}
-  m_PrefabInstance: {fileID: 438994258}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &438994261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 438994260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c75f3b696d5721e4582f3e04cd87332f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 4
-  currentHealth: 0
-  invincibleLength: 1
 --- !u!1 &474263817
 GameObject:
   m_ObjectHideFlags: 0
@@ -5719,7 +5679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9d19bf003a46f4b8ae1fd0bed01772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitToRespawn: 0
+  waitToRespawn: 2
 --- !u!4 &1091751134
 Transform:
   m_ObjectHideFlags: 0
