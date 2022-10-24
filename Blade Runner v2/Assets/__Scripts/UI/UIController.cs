@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class UIController : MonoBehaviour
 {
@@ -11,8 +13,10 @@ public class UIController : MonoBehaviour
     [SerializeField] RectTransform hearthBar;
     [SerializeField] GameObject hearthPrefab;
     [SerializeField] Sprite fullHealth, emptyHealth, halfHearth;
+    [SerializeField] TMP_Text gemCounter;
 
     private List<Image> hearths = new List<Image>();
+    private List<PickUp> gems = new List<PickUp>();
 
     private void Awake()
     {
@@ -23,6 +27,7 @@ public class UIController : MonoBehaviour
     {
         InstantiatePlayerHearth();
         UpdateHealthDisplay();
+        UpdateGemCount();
     }
 
     private void InstantiatePlayerHearth()
@@ -184,5 +189,18 @@ public class UIController : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void UpdateGemCount()
+    {
+        int gemsCount = gems.Count;
+        int inactiveGems = gems.Count(gem => gem.IsCollected());
+
+        gemCounter.text = $"{inactiveGems} / {gemsCount}";
+    }
+
+    public void AddGem(PickUp gem)
+    {
+        gems.Add(gem);
     }
 }
