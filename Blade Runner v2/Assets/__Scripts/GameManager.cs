@@ -6,7 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public float waitToRespawn;
+    [SerializeField] float waitToRespawn = 2;
+
+    private int gemsCollected;
 
     private void Awake()
     {
@@ -31,5 +33,15 @@ public class GameManager : MonoBehaviour
         UIController.Instance.UpdateHealthDisplay();
 
         PlayerHealthController.Instance.gameObject.SetActive(true);
+    }
+
+    public int GetGems()
+    {
+        return gemsCollected;
+    }
+
+    public void AddGem(int amount = 1)
+    {
+        gemsCollected += amount;
     }
 }

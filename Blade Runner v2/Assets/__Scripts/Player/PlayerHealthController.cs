@@ -66,6 +66,12 @@ public class PlayerHealthController : MonoBehaviour
         }
     }
 
+    public void HealPlayer(int amount)
+    {
+        int healthAfterHeal = currentHealth += amount;
+        currentHealth = Mathf.Min(healthAfterHeal, maxHealth);
+    }
+
     private void Die()
     {
         GameManager.Instance.RespawnPlayer();
