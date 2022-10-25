@@ -28,16 +28,18 @@ public class PickUp : MonoBehaviour
                 case Pickup.Gem:
                     GameManager.Instance.AddGem();
                     isCollected = true;
+                    AudioManager.Instance.PlaySoundEffect(GameResources.Instance.PickupGem);
                     UIController.Instance.UpdateGemCount();
                     gameObject.SetActive(false);
                     break;
 
                 case Pickup.Health:
-                    PlayerHealthController playerHealthController = collision.GetComponent<PlayerHealthController>();
+                    HealthController playerHealthController = collision.GetComponent<HealthController>();
                     if (playerHealthController.GetCurrentHealth() == playerHealthController.GetMaxHealth()) return;
                     playerHealthController.HealPlayer(healthToRecive);
                     UIController.Instance.UpdateHealthDisplay();
                     isCollected = true;
+                    AudioManager.Instance.PlaySoundEffect(GameResources.Instance.PickupHealth);
                     gameObject.SetActive(false);
                     break;
             }

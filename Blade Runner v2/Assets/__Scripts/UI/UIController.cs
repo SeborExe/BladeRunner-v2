@@ -37,7 +37,7 @@ public class UIController : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        int hearthNumber = PlayerHealthController.Instance.GetMaxHealth();
+        int hearthNumber = HealthController.Instance.GetMaxHealth();
 
         if (hearthNumber % 2 == 0)
         {
@@ -71,7 +71,7 @@ public class UIController : MonoBehaviour
 
     public void UpdateHealthDisplay()
     {
-        switch(PlayerHealthController.Instance.GetCurrentHealth())
+        switch(HealthController.Instance.GetCurrentHealth())
         {
             case 6:
                 for (int i = 0; i < hearths.Count; i++)

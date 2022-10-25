@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        MusicManager.Instance.PlayMusic(GameResources.Instance.MinaLevel);
+    }
+
     public void RespawnPlayer()
     {
         StartCoroutine(RespawnCoroutine());
@@ -22,17 +27,17 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RespawnCoroutine()
     {
-        PlayerHealthController.Instance.gameObject.SetActive(false);
+        HealthController.Instance.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(waitToRespawn);
 
-        PlayerHealthController.Instance.transform.position = CheckPointManager.Instance.GetSpawnPoint();
+        HealthController.Instance.transform.position = CheckPointManager.Instance.GetSpawnPoint();
 
-        int amountHealth = (int)Mathf.Ceil(PlayerHealthController.Instance.GetMaxHealth() / 2);
-        PlayerHealthController.Instance.SetCurrentHealth(amountHealth);
+        int amountHealth = (int)Mathf.Ceil(HealthController.Instance.GetMaxHealth() / 2);
+        HealthController.Instance.SetCurrentHealth(amountHealth);
         UIController.Instance.UpdateHealthDisplay();
 
-        PlayerHealthController.Instance.gameObject.SetActive(true);
+        HealthController.Instance.gameObject.SetActive(true);
     }
 
     public int GetGems()

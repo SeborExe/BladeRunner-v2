@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealthController : MonoBehaviour
+public class HealthController : MonoBehaviour
 {
-    public static PlayerHealthController Instance;
+    public static HealthController Instance;
 
+    [SerializeField] bool isPlayer = false;
     [SerializeField] int maxHealth = 3;
     [SerializeField] int currentHealth;
     [SerializeField] float invincibleLength = 1f;
@@ -48,12 +49,16 @@ public class PlayerHealthController : MonoBehaviour
         UpdateTimers();
     }
 
-    public void TakeDamage(int amount = 1)
+    public virtual void TakeDamage(int amount = 1)
     {
         if (invincibleTimer > 0) return;
 
         currentHealth -= amount;
-        UIController.Instance.UpdateHealthDisplay();
+
+        if (isPlayer)
+        {
+            UIController.Instance.UpdateHealthDisplay();
+        }
 
         if (currentHealth <= 0)
         {
@@ -63,6 +68,7 @@ public class PlayerHealthController : MonoBehaviour
         else
         {
             invincibleTimer = invincibleLength;
+            AudioManager.Instance.PlaySoundEffect(GameResources.Instance.PlayerHurt);
             PostHitImmunity();
         }
     }
@@ -73,10 +79,21 @@ public class PlayerHealthController : MonoBehaviour
         currentHealth = Mathf.Min(healthAfterHeal, maxHealth);
     }
 
-    private void Die()
+    public virtual void Die()
     {
         Instantiate(deathEffect, transform.position, Quaternion.identity);
-        GameManager.Instance.RespawnPlayer();
+
+        if (isPlayer)
+        {
+            AudioManager.Instance.PlaySoundEffect(GameResources.Instance.PlayerDead);
+            GameManager.Instance.RespawnPlayer();
+        }
+        else
+        {
+            GetComponentInParent<EnemyDrop>().CheckDrop();
+            AudioManager.Instance.PlaySoundEffect(GameResources.Instance.EnemyExplode);
+            gameObject.transform.parent.gameObject.SetActive(false);
+        }
     }
 
     private void UpdateTimers()
