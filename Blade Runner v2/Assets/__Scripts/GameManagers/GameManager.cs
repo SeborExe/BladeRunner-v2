@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        MusicManager.Instance.PlayMusic(GameResources.Instance.MinaLevel);
+    }
+
     public void RespawnPlayer()
     {
         StartCoroutine(RespawnCoroutine());

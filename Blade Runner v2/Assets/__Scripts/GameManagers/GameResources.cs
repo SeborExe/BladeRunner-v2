@@ -20,6 +20,14 @@ public class GameResources : MonoBehaviour
     public AudioClip PlayerJump;
     public AudioClip WarpJingle;
 
+    [Header("Music")]
+    public AudioClip BossBatle;
+    public AudioClip GameComplete;
+    public AudioClip LevelSelect;
+    public AudioClip LevelVictory;
+    public AudioClip MinaLevel;
+    public AudioClip TitleScreen;
+
     private void Awake()
     {
         Instance = this;

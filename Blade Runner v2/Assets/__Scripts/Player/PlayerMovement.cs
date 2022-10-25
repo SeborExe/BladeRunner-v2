@@ -140,5 +140,6 @@ public class PlayerMovement : MonoBehaviour
     public void Bounce()
     {
         rb.velocity = new Vector2(rb.velocity.x, bounceForce);
+        AudioManager.Instance.PlaySoundEffect(GameResources.Instance.PlayerJump);
     }
 }
