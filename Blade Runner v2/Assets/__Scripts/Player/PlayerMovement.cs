@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float knockBackLength;
     [SerializeField] private float knockBackForceX;
     [SerializeField] private float knockBackForceY;
+    [SerializeField] private float bounceForce;
 
     private float knockBackTimer;
     private float horizontalMove;
@@ -132,5 +133,10 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(0f, rb.velocity.y);
 
         animator.SetTrigger("hurt");
+    }
+
+    public void Bounce()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, bounceForce);
     }
 }
