@@ -28,6 +28,7 @@ public class PickUp : MonoBehaviour
                 case Pickup.Gem:
                     GameManager.Instance.AddGem();
                     isCollected = true;
+                    AudioManager.Instance.PlaySoundEffect(GameResources.Instance.PickupGem);
                     UIController.Instance.UpdateGemCount();
                     gameObject.SetActive(false);
                     break;
@@ -38,6 +39,7 @@ public class PickUp : MonoBehaviour
                     playerHealthController.HealPlayer(healthToRecive);
                     UIController.Instance.UpdateHealthDisplay();
                     isCollected = true;
+                    AudioManager.Instance.PlaySoundEffect(GameResources.Instance.PickupHealth);
                     gameObject.SetActive(false);
                     break;
             }

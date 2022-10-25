@@ -68,6 +68,7 @@ public class HealthController : MonoBehaviour
         else
         {
             invincibleTimer = invincibleLength;
+            AudioManager.Instance.PlaySoundEffect(GameResources.Instance.PlayerHurt);
             PostHitImmunity();
         }
     }
@@ -84,11 +85,13 @@ public class HealthController : MonoBehaviour
 
         if (isPlayer)
         {
+            AudioManager.Instance.PlaySoundEffect(GameResources.Instance.PlayerDead);
             GameManager.Instance.RespawnPlayer();
         }
         else
         {
             GetComponentInParent<EnemyDrop>().CheckDrop();
+            AudioManager.Instance.PlaySoundEffect(GameResources.Instance.EnemyExplode);
             gameObject.transform.parent.gameObject.SetActive(false);
         }
     }

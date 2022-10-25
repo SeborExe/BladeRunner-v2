@@ -63,12 +63,14 @@ public class PlayerMovement : MonoBehaviour
             if (controller.GetIsGrounded())
             {
                 rb.velocity = new Vector2(rb.velocity.x, controller.GetJumpForce());
+                AudioManager.Instance.PlaySoundEffect(GameResources.Instance.PlayerJump);
             }
             else
             {
                 if (canDoubleJump)
                 {
                     rb.velocity = new Vector2(rb.velocity.x, controller.GetJumpForce());
+                    AudioManager.Instance.PlaySoundEffect(GameResources.Instance.PlayerJump);
                     canDoubleJump = false;
                 }
             }
