@@ -33,7 +33,7 @@ public class PickUp : MonoBehaviour
                     break;
 
                 case Pickup.Health:
-                    PlayerHealthController playerHealthController = collision.GetComponent<PlayerHealthController>();
+                    HealthController playerHealthController = collision.GetComponent<HealthController>();
                     if (playerHealthController.GetCurrentHealth() == playerHealthController.GetMaxHealth()) return;
                     playerHealthController.HealPlayer(healthToRecive);
                     UIController.Instance.UpdateHealthDisplay();

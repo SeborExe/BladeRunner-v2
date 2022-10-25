@@ -6,7 +6,7 @@ public class OutOfWorld : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<PlayerHealthController>(out PlayerHealthController playerHealth))
+        if (collision.TryGetComponent<HealthController>(out HealthController playerHealth))
         {
             playerHealth.TakeDamage(playerHealth.GetMaxHealth());
         }
