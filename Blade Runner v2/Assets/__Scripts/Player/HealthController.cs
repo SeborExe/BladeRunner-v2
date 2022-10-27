@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
-    public static HealthController Instance;
-
     [SerializeField] bool isPlayer = false;
     [SerializeField] int maxHealth = 3;
     [SerializeField] int currentHealth;
@@ -24,13 +22,7 @@ public class HealthController : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-
         spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    private void Start()
-    {
         currentHealth = maxHealth;
     }
 

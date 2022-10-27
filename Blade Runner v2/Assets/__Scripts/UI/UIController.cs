@@ -14,6 +14,10 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject hearthPrefab;
     [SerializeField] Sprite fullHealth, emptyHealth, halfHearth;
     [SerializeField] TMP_Text gemCounter;
+    [SerializeField] Image fadeScreen;
+
+    private const float fadeSpeed = 1.5f;
+    private bool shouldFadeBlack, shouldFadeFromBlack;
 
     private List<Image> hearths = new List<Image>();
     private List<PickUp> gems = new List<PickUp>();
@@ -28,6 +32,32 @@ public class UIController : MonoBehaviour
         InstantiatePlayerHearth();
         UpdateHealthDisplay();
         UpdateGemCount();
+        FadeFromBlack();
+    }
+
+    private void Update()
+    {
+        if (shouldFadeBlack)
+        {
+            fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b,
+                Mathf.MoveTowards(fadeScreen.color.a, 1f, fadeSpeed * Time.deltaTime));
+
+            if (fadeScreen.color.a == 1f)
+            {
+                shouldFadeBlack = false;
+            }
+        }
+
+        if (shouldFadeFromBlack)
+        {
+            fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b,
+                Mathf.MoveTowards(fadeScreen.color.a, 0f, fadeSpeed * Time.deltaTime));
+
+            if (fadeScreen.color.a == 0f)
+            {
+                shouldFadeFromBlack = false;
+            }
+        }
     }
 
     private void InstantiatePlayerHearth()
@@ -37,7 +67,7 @@ public class UIController : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        int hearthNumber = HealthController.Instance.GetMaxHealth();
+        int hearthNumber = GameManager.Instance.healthController.GetMaxHealth();
 
         if (hearthNumber % 2 == 0)
         {
@@ -71,7 +101,7 @@ public class UIController : MonoBehaviour
 
     public void UpdateHealthDisplay()
     {
-        switch(HealthController.Instance.GetCurrentHealth())
+        switch(GameManager.Instance.healthController.GetCurrentHealth())
         {
             case 6:
                 for (int i = 0; i < hearths.Count; i++)
@@ -202,5 +232,22 @@ public class UIController : MonoBehaviour
     public void AddGem(PickUp gem)
     {
         gems.Add(gem);
+    }
+
+    public void FadeToBlack()
+    {
+        shouldFadeBlack = true;
+        shouldFadeFromBlack = false;
+    }
+
+    public void FadeFromBlack()
+    {
+        shouldFadeFromBlack = true;
+        shouldFadeBlack = false;
+    }
+
+    public float GetFadeSpeed()
+    {
+        return fadeSpeed;
     }
 }

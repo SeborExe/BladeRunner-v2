@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] float waitToRespawn = 2;
 
+    [HideInInspector] public Player player;
+    [HideInInspector] public HealthController healthController;
+
     private int gemsCollected;
 
     private void Awake()
@@ -18,6 +21,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         MusicManager.Instance.PlayMusic(GameResources.Instance.MinaLevel);
+
+        player = Player.Instance;
+        healthController = player.playerHealth;
     }
 
     public void RespawnPlayer()
@@ -27,17 +33,20 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RespawnCoroutine()
     {
-        HealthController.Instance.gameObject.SetActive(false);
+        player.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(waitToRespawn);
+        yield return new WaitForSeconds(waitToRespawn - (1f / UIController.Instance.GetFadeSpeed()));
+        UIController.Instance.FadeToBlack();
+        yield return new WaitForSeconds(1f / UIController.Instance.GetFadeSpeed() + 0.2f);
+        UIController.Instance.FadeFromBlack();
 
-        HealthController.Instance.transform.position = CheckPointManager.Instance.GetSpawnPoint();
+        player.transform.position = CheckPointManager.Instance.GetSpawnPoint();
 
-        int amountHealth = (int)Mathf.Ceil(HealthController.Instance.GetMaxHealth() / 2);
-        HealthController.Instance.SetCurrentHealth(amountHealth);
+        int amountHealth = (int)Mathf.Ceil(healthController.GetMaxHealth() / 2);
+        healthController.SetCurrentHealth(amountHealth);
         UIController.Instance.UpdateHealthDisplay();
 
-        HealthController.Instance.gameObject.SetActive(true);
+        player.gameObject.SetActive(true);
     }
 
     public int GetGems()

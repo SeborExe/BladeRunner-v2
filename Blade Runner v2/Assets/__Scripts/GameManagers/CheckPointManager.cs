@@ -17,7 +17,7 @@ public class CheckPointManager : MonoBehaviour
 
     private void Start()
     {
-        spawnPoint = HealthController.Instance.transform.position + Vector3.up;
+        spawnPoint = GameManager.Instance.player.transform.position + Vector3.up;
     }
 
     public void AddCheckPoint(CheckPoint checkPoint)
