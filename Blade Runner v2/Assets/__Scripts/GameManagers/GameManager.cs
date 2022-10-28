@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     [SerializeField] float waitToRespawn = 2;
+    [SerializeField] string levelToLoad;
 
     [HideInInspector] public Player player;
     [HideInInspector] public HealthController healthController;
@@ -57,5 +59,26 @@ public class GameManager : MonoBehaviour
     public void AddGem(int amount = 1)
     {
         gemsCollected += amount;
+    }
+
+    public void EndLevel()
+    {
+        StartCoroutine(EndLevelCouroutine());
+    }
+
+    private IEnumerator EndLevelCouroutine()
+    {
+        player.playerMovement.SetStopInput(true);
+        player.playerMovement.StopPlayer();
+
+        yield return new WaitForSeconds(1f);
+        UIController.Instance.ShowCompleteText();
+        yield return new WaitForSeconds(2f);
+
+        UIController.Instance.FadeToBlack();
+
+        yield return new WaitForSeconds((1f / UIController.Instance.GetFadeSpeed()) + 0.25f);
+
+        SceneManager.LoadScene(levelToLoad);
     }
 }

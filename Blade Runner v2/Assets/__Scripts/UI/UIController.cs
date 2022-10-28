@@ -15,8 +15,9 @@ public class UIController : MonoBehaviour
     [SerializeField] Sprite fullHealth, emptyHealth, halfHearth;
     [SerializeField] TMP_Text gemCounter;
     [SerializeField] Image fadeScreen;
+    [SerializeField] TMP_Text completeText;
 
-    private const float fadeSpeed = 1.5f;
+    private const float fadeSpeed = 3.5f;
     private bool shouldFadeBlack, shouldFadeFromBlack;
 
     private List<Image> hearths = new List<Image>();
@@ -249,5 +250,10 @@ public class UIController : MonoBehaviour
     public float GetFadeSpeed()
     {
         return fadeSpeed;
+    }
+
+    public void ShowCompleteText()
+    {
+        completeText.gameObject.SetActive(true);
     }
 }
