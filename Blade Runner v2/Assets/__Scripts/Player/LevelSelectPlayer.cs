@@ -5,8 +5,10 @@ using UnityEngine;
 public class LevelSelectPlayer : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 10f;
-
     [SerializeField] MapPoint currentPoint;
+    [SerializeField] LevelSelectManager selectManager;
+
+    private bool levelLoading;
 
     private void Update()
     {
@@ -17,7 +19,7 @@ public class LevelSelectPlayer : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, currentPoint.transform.position, moveSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, currentPoint.transform.position) > 0.01f) return;
+        if (Vector3.Distance(transform.position, currentPoint.transform.position) > 0.01f || levelLoading) return; 
 
         if (Input.GetAxisRaw("Horizontal") > 0.5f)
         {
@@ -50,10 +52,33 @@ public class LevelSelectPlayer : MonoBehaviour
                 SetNextPoint(currentPoint.down);
             }
         }
+
+        if (currentPoint.isLevel)
+        {
+            LevelSelectUIController.Instance.ShowInfo(currentPoint);
+        }
+        else
+        {
+            LevelSelectUIController.Instance.HideInfo();
+        }
+
+        if (currentPoint.isLevel && !currentPoint.isLocked)
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                levelLoading = true;
+                selectManager.LoadLevel(currentPoint);
+            }
+        }
     }
 
     private void SetNextPoint(MapPoint nextPoint)
     {
         currentPoint = nextPoint;
+    }
+
+    public MapPoint GetCurrentPoint()
+    {
+        return currentPoint;
     }
 }

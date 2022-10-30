@@ -5211,6 +5211,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3047562622815778378, guid: fa758083765ee934fbe6b252469ea1cc, type: 3}
+      propertyPath: levelToLoad
+      value: Level_Select
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047562623871875738, guid: fa758083765ee934fbe6b252469ea1cc, type: 3}
+      propertyPath: levelSelect
+      value: Level_Select
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa758083765ee934fbe6b252469ea1cc, type: 3}
 --- !u!1001 &3740614952611370039
