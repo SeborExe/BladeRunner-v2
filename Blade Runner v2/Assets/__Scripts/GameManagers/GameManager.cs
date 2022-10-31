@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public HealthController healthController;
 
     private int gemsCollected;
+    private float timeInLevel;
 
     private void Awake()
     {
@@ -26,6 +27,12 @@ public class GameManager : MonoBehaviour
 
         player = Player.Instance;
         healthController = player.playerHealth;
+        timeInLevel = 0f;
+    }
+
+    private void Update()
+    {
+        timeInLevel += Time.deltaTime;
     }
 
     public void RespawnPlayer()
@@ -79,8 +86,38 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds((1f / UIController.Instance.GetFadeSpeed()) + 0.25f);
 
-        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_unlocked", 1);
+        PlayerPrefsSaves();
 
         SceneManager.LoadScene(levelToLoad);
+    }
+
+    private void PlayerPrefsSaves()
+    {
+        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_unlocked", 1);
+        PlayerPrefs.SetString("CurrentLevel", SceneManager.GetActiveScene().name);
+
+        if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_gems"))
+        {
+            if (gemsCollected > PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_gems"))
+            {
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_gems", gemsCollected);
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_gems", gemsCollected);
+        }
+
+        if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_time"))
+        {
+            if (timeInLevel < PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name + "_time"))
+            {
+                PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_time", timeInLevel);
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "_time", timeInLevel);
+        }
     }
 }

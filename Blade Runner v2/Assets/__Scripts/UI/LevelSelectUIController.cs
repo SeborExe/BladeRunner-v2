@@ -10,7 +10,7 @@ public class LevelSelectUIController : MonoBehaviour
 
     [SerializeField] Image fadeScreen;
     [SerializeField] GameObject levelInfoPanel;
-    [SerializeField] TMP_Text levelName;
+    [SerializeField] TMP_Text levelName, gemsText, bestTimeText, targetTimeText;
 
     private const float fadeSpeed = 3.5f;
     private bool shouldFadeBlack, shouldFadeFromBlack;
@@ -70,6 +70,18 @@ public class LevelSelectUIController : MonoBehaviour
     public void ShowInfo(MapPoint currentMappoint)
     {
         levelName.text = currentMappoint.levelName;
+        gemsText.text = $"{currentMappoint.gemsCollected}/{currentMappoint.totalGems}";
+        targetTimeText.text = $"Target: {currentMappoint.targetTime}s";
+
+        if (currentMappoint.bestTime == 0)
+        {
+            bestTimeText.text = "Best: ---";
+        }
+        else
+        {
+            bestTimeText.text = "Best: " + currentMappoint.bestTime.ToString("F2") + "s";
+        }
+
         levelInfoPanel.SetActive(true);
     }
 

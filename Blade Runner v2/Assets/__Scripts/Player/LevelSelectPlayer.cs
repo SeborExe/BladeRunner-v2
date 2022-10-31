@@ -81,4 +81,9 @@ public class LevelSelectPlayer : MonoBehaviour
     {
         return currentPoint;
     }
+
+    public void SetCurrentPoint(MapPoint newPoint)
+    {
+        currentPoint = newPoint;
+    }
 }
