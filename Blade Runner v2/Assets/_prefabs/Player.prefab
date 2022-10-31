@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06298706, y: -1.0210342}
+  m_Offset: {x: -0.06551069, y: -1.0375603}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.68174237, y: 0.08613849}
+  m_Size: {x: 0.79782784, y: 0.06190014}
   m_EdgeRadius: 0
 --- !u!114 &729730245
 MonoBehaviour:
@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 1165853731585072940}
   - component: {fileID: 1165853731585072941}
   - component: {fileID: 438994261}
+  - component: {fileID: 5571220066257816075}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -259,7 +260,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7720166, y: 0.6689882}
+  m_Size: {x: 0.72916234, y: 0.6689882}
   m_EdgeRadius: 0
 --- !u!95 &1165853731585072936
 Animator:
@@ -333,8 +334,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 40
   knockBackLength: 0.25
-  knockBackForceX: 30
-  knockBackForceY: 10
+  knockBackForceX: 20
+  knockBackForceY: 6
   bounceForce: 15
 --- !u!114 &438994261
 MonoBehaviour:
@@ -353,6 +354,20 @@ MonoBehaviour:
   currentHealth: 0
   invincibleLength: 1
   deathEffect: {fileID: 581471997308742041, guid: 3a79cf38f4fca36469d964a7aaf8a4c7, type: 3}
+--- !u!114 &5571220066257816075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165853731585072934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d8951c3318c2b14cbbb1561f824c96d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: {fileID: 0}
+  playerMovement: {fileID: 0}
 --- !u!1 &1165853732225011654
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     private Animator animator;
     private Rigidbody2D rb;
+    private Stomp stomp;
 
     [SerializeField] private float moveSpeed = 40f;
     [SerializeField] private float knockBackLength;
@@ -19,11 +20,13 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalMove;
     private bool canDoubleJump;
     private bool crouch;
+    private bool stopInput;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        stomp = GetComponentInChildren<Stomp>();
     }
 
     private void Start()
@@ -36,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
         UpdateTimers();
 
         if (knockBackTimer > 0) return;
+
+        if (stopInput) return;
 
         HandleMoving();
 
@@ -125,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
             if (knockBackTimer < 0)
             {
                 knockBackTimer = 0;
+                stomp.enabled = true;
             }
         }
     }
@@ -132,7 +138,8 @@ public class PlayerMovement : MonoBehaviour
     public void KnockBack()
     {
         knockBackTimer = knockBackLength;
-        rb.velocity = new Vector2(0f, rb.velocity.y);
+        //rb.velocity = new Vector2(0f, rb.velocity.y);
+        stomp.enabled = false;
 
         animator.SetTrigger("hurt");
     }
@@ -141,5 +148,16 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, bounceForce);
         AudioManager.Instance.PlaySoundEffect(GameResources.Instance.PlayerJump);
+    }
+
+    public void SetStopInput(bool stopInput)
+    {
+        this.stopInput = stopInput;
+    }
+
+    public void StopPlayer()
+    {
+        horizontalMove = 0;
+        UpdateAnimations();
     }
 }
