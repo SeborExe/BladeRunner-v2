@@ -78,13 +78,16 @@ public class GameManager : MonoBehaviour
         player.playerMovement.SetStopInput(true);
         player.playerMovement.StopPlayer();
 
+        MusicManager.Instance.StopPlayMusic();
+        MusicManager.Instance.PlayMusic(GameResources.Instance.LevelVictory, true);
+
         yield return new WaitForSeconds(1f);
         UIController.Instance.ShowCompleteText();
         yield return new WaitForSeconds(2f);
 
         UIController.Instance.FadeToBlack();
 
-        yield return new WaitForSeconds((1f / UIController.Instance.GetFadeSpeed()) + 0.25f);
+        yield return new WaitForSeconds((1f / UIController.Instance.GetFadeSpeed()) + 3f);
 
         PlayerPrefsSaves();
 

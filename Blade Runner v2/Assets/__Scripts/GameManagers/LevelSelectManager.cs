@@ -27,6 +27,8 @@ public class LevelSelectManager : MonoBehaviour
 
     private IEnumerator LoadLevelCoroutine(MapPoint currentMappoint)
     {
+        AudioManager.Instance.PlaySoundEffect(GameResources.Instance.LevelSelected);
+
         LevelSelectUIController.Instance.FadeToBlack();
         yield return new WaitForSeconds((1f / LevelSelectUIController.Instance.GetFadeSpeed()) + 0.25f);
         SceneManager.LoadScene(currentMappoint.levelToLoad);

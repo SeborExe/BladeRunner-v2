@@ -75,6 +75,8 @@ public class LevelSelectPlayer : MonoBehaviour
     private void SetNextPoint(MapPoint nextPoint)
     {
         currentPoint = nextPoint;
+
+        AudioManager.Instance.PlaySoundEffect(GameResources.Instance.MapMovement);
     }
 
     public MapPoint GetCurrentPoint()
