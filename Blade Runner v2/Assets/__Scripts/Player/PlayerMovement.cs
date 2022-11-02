@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Stomp stomp;
 
     [SerializeField] private float moveSpeed = 40f;
+    [SerializeField] private float ladderSpeed = 8f;
     [SerializeField] private float knockBackLength;
     [SerializeField] private float knockBackForceX;
     [SerializeField] private float knockBackForceY;
@@ -21,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     private bool canDoubleJump;
     private bool crouch;
     private bool stopInput;
+    [SerializeField] private bool isLadder;
+    [SerializeField] private bool isClimbing;
 
     private void Awake()
     {
@@ -48,12 +51,16 @@ public class PlayerMovement : MonoBehaviour
 
         HandleCrouching();
 
+        HandleLadderClimbing();
+
         UpdateAnimations();
     }
 
     private void FixedUpdate()
     {
         controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, false);
+
+        OnClimbing();
     }
 
     private void HandleMoving()
@@ -63,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleJumping()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && !isLadder)
         {
             if (controller.GetIsGrounded())
             {
@@ -100,10 +107,32 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void HandleLadderClimbing()
+    {
+        if (isLadder && Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f)
+        {
+            isClimbing = true;
+        }
+        else if (isLadder && Mathf.Abs(Input.GetAxis("Vertical")) <= 0.1f)
+        {
+            isClimbing = false;
+        }
+    }
+
     private void UpdateAnimations()
     {
         animator.SetFloat("moveSpeed", Mathf.Abs(horizontalMove));
         animator.SetBool("isGrounded", controller.GetIsGrounded());
+        animator.SetBool("isClimbing", isClimbing);
+        animator.SetBool("isLadder", isLadder);
+    }
+
+    private void OnClimbing()
+    {
+        if (isClimbing)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Input.GetAxisRaw("Vertical") * ladderSpeed);
+        }
     }
 
     public void OnCrouching(bool isCrouching)
@@ -132,6 +161,42 @@ public class PlayerMovement : MonoBehaviour
                 knockBackTimer = 0;
                 stomp.enabled = true;
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            transform.parent = collision.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            transform.parent = null;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ladder"))
+        {
+            isLadder = true;
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0f;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ladder"))
+        {
+            isLadder = false;
+            isClimbing = false;
+            rb.gravityScale = 3f;
         }
     }
 

@@ -8,7 +8,7 @@ public class DamagePlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<HealthController>(out HealthController playerHealth))
+        if (collision.TryGetComponent<HealthController>(out HealthController playerHealth) && collision.CompareTag("Player"))
         {
             playerHealth.TakeDamage(damage);
             playerHealth.GetComponent<PlayerMovement>().KnockBack();
