@@ -1752,7 +1752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5140337061574881418, guid: 80137f3047d836548a66c861fb9e0681, type: 3}
       propertyPath: totalGems
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5140337061574881418, guid: 80137f3047d836548a66c861fb9e0681, type: 3}
       propertyPath: levelToLoad
