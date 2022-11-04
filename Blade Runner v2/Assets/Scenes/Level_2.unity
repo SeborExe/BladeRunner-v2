@@ -212,6 +212,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &120004342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 120004343}
+  m_Layer: 0
+  m_Name: MinePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &120004343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120004342}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.52, y: -1.17, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1612286739}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &125275699
 GameObject:
   m_ObjectHideFlags: 0
@@ -5855,7 +5886,7 @@ Transform:
   m_Children:
   - {fileID: 5980806}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &374310435 stripped
 Transform:
@@ -6437,7 +6468,7 @@ Transform:
   - {fileID: 1358980117}
   - {fileID: 477552722}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &897817185
 GameObject:
@@ -6554,6 +6585,71 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1320582684
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6683263699222830350, guid: 129b66fb6a792704e80404239077479e, type: 3}
+      propertyPath: isBossMine
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683263699222830350, guid: 129b66fb6a792704e80404239077479e, type: 3}
+      propertyPath: timeToDetonate
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683263699222830351, guid: 129b66fb6a792704e80404239077479e, type: 3}
+      propertyPath: m_Name
+      value: TankBoss_Mine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683263699222830354, guid: 129b66fb6a792704e80404239077479e, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683263699222830354, guid: 129b66fb6a792704e80404239077479e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.791212
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683263699222830354, guid: 129b66fb6a792704e80404239077479e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.7151294
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683263699222830354, guid: 129b66fb6a792704e80404239077479e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683263699222830354, guid: 129b66fb6a792704e80404239077479e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683263699222830354, guid: 129b66fb6a792704e80404239077479e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683263699222830354, guid: 129b66fb6a792704e80404239077479e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683263699222830354, guid: 129b66fb6a792704e80404239077479e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683263699222830354, guid: 129b66fb6a792704e80404239077479e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683263699222830354, guid: 129b66fb6a792704e80404239077479e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683263699222830354, guid: 129b66fb6a792704e80404239077479e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 129b66fb6a792704e80404239077479e, type: 3}
 --- !u!1 &1345233583
 GameObject:
   m_ObjectHideFlags: 0
@@ -7100,6 +7196,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2079162675}
+  - {fileID: 120004343}
   - {fileID: 1698908522}
   m_Father: {fileID: 1806070400}
   m_RootOrder: 0
@@ -7293,7 +7390,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1612286739}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1698908523
 MonoBehaviour:
@@ -7487,7 +7584,7 @@ Transform:
   - {fileID: 2091557982}
   - {fileID: 897817186}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1806070401
 MonoBehaviour:
@@ -7513,8 +7610,11 @@ MonoBehaviour:
   - {fileID: 2091557982}
   - {fileID: 897817186}
   bullet: {fileID: 5065745227695156803, guid: 23c3abcb552da2b4cb8da083e0d1637e, type: 3}
-  timeBetweenShots: 1.25
+  mine: {fileID: 6683263699222830351, guid: 129b66fb6a792704e80404239077479e, type: 3}
+  timeBetweenShots: 1.7
+  timeBetweenMines: 1
   firePoint: {fileID: 2079162675}
+  minePoint: {fileID: 120004343}
   hurtTime: 0.8
   hitBox: {fileID: 1698908521}
 --- !u!1 &1891904739
@@ -7642,7 +7742,7 @@ Transform:
   - {fileID: 1498835255}
   - {fileID: 494094818}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2079162674
 GameObject:
@@ -7750,7 +7850,7 @@ Transform:
   - {fileID: 286164043}
   - {fileID: 1345233584}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3047562623871875735
 PrefabInstance:

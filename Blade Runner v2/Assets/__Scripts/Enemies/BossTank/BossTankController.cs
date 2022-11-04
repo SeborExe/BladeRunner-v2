@@ -24,14 +24,18 @@ public class BossTankController : MonoBehaviour
 
     [Header("Aggro State")]
     [SerializeField] GameObject bullet;
+    [SerializeField] GameObject mine;
     [SerializeField] float timeBetweenShots;
+    [SerializeField] float timeBetweenMines;
     [SerializeField] Transform firePoint;
+    [SerializeField] Transform minePoint;
     [SerializeField] float hurtTime;
     [SerializeField] GameObject hitBox;
 
     private Animator animator;
     private bool moveRight;
     private float shotTimer;
+    private float mineTimer;
     private float hurtTimer;
 
     private void Awake()
@@ -98,6 +102,14 @@ public class BossTankController : MonoBehaviour
                 SetAfterMove(-1, true);
             }
         }
+
+        mineTimer -= Time.deltaTime;
+
+        if (mineTimer <= 0)
+        {
+            mineTimer = timeBetweenMines;
+            Instantiate(mine, minePoint.position, minePoint.rotation);
+        }
     }
 
     private void SetAfterMove(float scale, bool isMovingRight)
@@ -105,7 +117,7 @@ public class BossTankController : MonoBehaviour
         bossTransform.localScale = new Vector3(scale, 1f, 1f);
         moveRight = isMovingRight;
         currentBossState = bossStates.shooting;
-        shotTimer = timeBetweenShots;
+        shotTimer = 0;
 
         animator.SetTrigger("StopMoving");
         hitBox.SetActive(true);
@@ -131,6 +143,7 @@ public class BossTankController : MonoBehaviour
             {
                 hurtTimer = 0;
                 currentBossState = bossStates.moving;
+                mineTimer = 0;
             }
         }
     }

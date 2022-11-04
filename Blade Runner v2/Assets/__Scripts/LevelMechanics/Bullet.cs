@@ -54,7 +54,6 @@ public class Bullet : MonoBehaviour
 
     private void Damage(HealthController health)
     {
-        health.TakeDamage(damage);
-        health.GetComponent<PlayerMovement>().KnockBack();
+        health.TakeDamage(damage, true);
     }
 }

@@ -13,6 +13,7 @@ public class HealthController : MonoBehaviour
     [SerializeField] bool hasSpriteRenderer = true;
 
     private SpriteRenderer spriteRenderer;
+    private PlayerMovement playerMovement;
 
     private float invincibleTimer;
     private Coroutine immunityCoroutine;
@@ -24,6 +25,7 @@ public class HealthController : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerMovement = GetComponent<PlayerMovement>();
         currentHealth = maxHealth;
     }
 
@@ -42,7 +44,7 @@ public class HealthController : MonoBehaviour
         UpdateTimers();
     }
 
-    public virtual void TakeDamage(int amount = 1)
+    public virtual void TakeDamage(int amount = 1, bool knockBack = false)
     {
         if (invincibleTimer > 0) return;
 
@@ -51,6 +53,11 @@ public class HealthController : MonoBehaviour
         if (isPlayer)
         {
             UIController.Instance.UpdateHealthDisplay();
+
+            if (knockBack)
+            {
+                playerMovement.KnockBack();
+            }
         }
 
         if (currentHealth <= 0)
