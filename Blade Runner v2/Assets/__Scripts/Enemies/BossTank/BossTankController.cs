@@ -27,6 +27,7 @@ public class BossTankController : MonoBehaviour
     [SerializeField] float timeBetweenShots;
     [SerializeField] Transform firePoint;
     [SerializeField] float hurtTime;
+    [SerializeField] GameObject hitBox;
 
     private Animator animator;
     private bool moveRight;
@@ -46,7 +47,6 @@ public class BossTankController : MonoBehaviour
     private void Update()
     {
         UpdateBossState();
-        UpdateShotTimers();
 
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.P))
@@ -61,6 +61,7 @@ public class BossTankController : MonoBehaviour
         switch(currentBossState)
         {
             case bossStates.shooting:
+                UpdateShotTimers();
                 break;
 
             case bossStates.hurt:
@@ -107,14 +108,17 @@ public class BossTankController : MonoBehaviour
         shotTimer = timeBetweenShots;
 
         animator.SetTrigger("StopMoving");
+        hitBox.SetActive(true);
     }
 
     private void UpdateShotTimers()
     {
-        if (shotTimer != 0)
+        shotTimer -= Time.deltaTime;
+        if (shotTimer <= 0)
         {
-            shotTimer -= Time.deltaTime;
-            if (shotTimer < 0) shotTimer = 0; 
+            shotTimer = timeBetweenShots;
+            GameObject newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation);
+            newBullet.transform.localScale = bossTransform.localScale;
         }
     }
 

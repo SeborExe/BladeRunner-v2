@@ -10,6 +10,7 @@ public class HealthController : MonoBehaviour
     [SerializeField] int currentHealth;
     [SerializeField] float invincibleLength = 1f;
     [SerializeField] GameObject deathEffect;
+    [SerializeField] bool hasSpriteRenderer = true;
 
     private SpriteRenderer spriteRenderer;
 
@@ -102,6 +103,8 @@ public class HealthController : MonoBehaviour
 
     private void PostHitImmunity()
     {
+        if (!hasSpriteRenderer) return;
+
         if (immunityCoroutine != null)
             StopCoroutine(immunityCoroutine);
 
