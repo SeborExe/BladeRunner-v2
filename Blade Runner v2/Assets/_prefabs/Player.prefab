@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 729730245}
   m_Layer: 7
   m_Name: StompBox
-  m_TagString: Untagged
+  m_TagString: StompBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06551069, y: -1.0375603}
+  m_Offset: {x: -0.07221836, y: -1.0429217}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.79782784, y: 0.06190014}
+  m_Size: {x: 0.85596097, y: 0.12884474}
   m_EdgeRadius: 0
 --- !u!114 &729730245
 MonoBehaviour:
@@ -327,10 +327,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
+  isBoss: 0
   maxHealth: 4
   currentHealth: 0
   invincibleLength: 1
   deathEffect: {fileID: 581471997308742041, guid: 3a79cf38f4fca36469d964a7aaf8a4c7, type: 3}
+  hasSpriteRenderer: 1
 --- !u!114 &5571220066257816075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 0}
   playerMovement: {fileID: 0}
+  characterController: {fileID: 0}
 --- !u!1 &1165853732225011654
 GameObject:
   m_ObjectHideFlags: 0

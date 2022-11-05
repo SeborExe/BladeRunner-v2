@@ -32,7 +32,7 @@ public class Mine : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<HealthController>(out HealthController health) && collision.CompareTag("Player") || collision.CompareTag("StompBox"))
+        if (collision.TryGetComponent<HealthController>(out HealthController health) && (collision.CompareTag("Player") || collision.CompareTag("StompBox")))
         {
             health.TakeDamage(damage, true);
             AudioManager.Instance.PlaySoundEffect(GameResources.Instance.PlayerDead);

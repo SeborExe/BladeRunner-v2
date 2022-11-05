@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
+    //public enum 
+
     [SerializeField] bool isPlayer = false;
+    [SerializeField] bool isBoss = false;
     [SerializeField] int maxHealth = 3;
     [SerializeField] int currentHealth;
     [SerializeField] float invincibleLength = 1f;
@@ -93,6 +96,12 @@ public class HealthController : MonoBehaviour
             GetComponentInParent<EnemyDrop>().CheckDrop();
             AudioManager.Instance.PlaySoundEffect(GameResources.Instance.EnemyExplode);
             gameObject.transform.parent.gameObject.SetActive(false);
+
+            if (isBoss)
+            {
+                Boss boss = GetComponent<Boss>();
+                boss.OnDefeated();
+            }
         }
     }
 

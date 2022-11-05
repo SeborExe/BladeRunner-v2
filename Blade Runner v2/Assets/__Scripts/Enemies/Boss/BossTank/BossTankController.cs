@@ -9,7 +9,8 @@ public class BossTankController : MonoBehaviour
     {
         shooting,
         hurt, 
-        moving
+        moving,
+        dialogue
     };
 
     [SerializeField] Transform bossTransform;
@@ -23,14 +24,32 @@ public class BossTankController : MonoBehaviour
     [Space(20)]
 
     [Header("Aggro State")]
-    [SerializeField] GameObject bullet;
-    [SerializeField] GameObject mine;
     [SerializeField] float timeBetweenShots;
     [SerializeField] float timeBetweenMines;
+    [SerializeField] float firstMineTime = 0.1f;
     [SerializeField] Transform firePoint;
     [SerializeField] Transform minePoint;
     [SerializeField] float hurtTime;
     [SerializeField] GameObject hitBox;
+
+    [Space(20)]
+
+    [Header("Weapons")]
+    [SerializeField] GameObject normalBullet;
+    [SerializeField] GameObject bounceBullet;
+    [SerializeField] GameObject mine;
+
+    [Space(20)]
+
+    [Header("BounceBulletStats")]
+    [SerializeField, Range(0, 100)] int chanseToBounceBullet = 25;
+    [SerializeField] int bounceBulletChanceDecrease;
+
+    [Space(20)]
+
+    [Header("Buff when low health")]
+    [SerializeField] float shotSpeedUp;
+    [SerializeField] float mineSpeedUp;
 
     private Animator animator;
     private bool moveRight;
@@ -129,9 +148,28 @@ public class BossTankController : MonoBehaviour
         if (shotTimer <= 0)
         {
             shotTimer = timeBetweenShots;
-            GameObject newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation);
+            GameObject newBullet = Instantiate(GetBullet(), firePoint.position, firePoint.rotation);
             newBullet.transform.localScale = bossTransform.localScale;
+
+            AudioManager.Instance.PlaySoundEffect(GameResources.Instance.BossShot);
         }
+    }
+
+    private GameObject GetBullet()
+    {
+        int bulletChance = UnityEngine.Random.Range(0, 100);
+        GameObject bullet = null;
+
+        if (bulletChance < chanseToBounceBullet)
+        {
+            bullet = bounceBullet;
+        }
+        else
+        {
+            bullet = normalBullet;
+        }
+
+        return bullet;
     }
 
     private void UpdateHurtTimer()
@@ -143,7 +181,7 @@ public class BossTankController : MonoBehaviour
             {
                 hurtTimer = 0;
                 currentBossState = bossStates.moving;
-                mineTimer = 0;
+                mineTimer = firstMineTime;
             }
         }
     }
@@ -153,6 +191,11 @@ public class BossTankController : MonoBehaviour
         currentBossState = bossStates.hurt;
         hurtTimer = hurtTime;
 
+        timeBetweenShots /= shotSpeedUp;
+        timeBetweenMines /= mineSpeedUp;
+        chanseToBounceBullet -= bounceBulletChanceDecrease;
+
+        AudioManager.Instance.PlaySoundEffect(GameResources.Instance.BossImpact);
         animator.SetTrigger("Hit");
     }
 }
