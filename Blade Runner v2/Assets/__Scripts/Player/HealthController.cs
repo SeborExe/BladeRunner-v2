@@ -5,13 +5,18 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
+    //public enum 
+
     [SerializeField] bool isPlayer = false;
+    [SerializeField] bool isBoss = false;
     [SerializeField] int maxHealth = 3;
     [SerializeField] int currentHealth;
     [SerializeField] float invincibleLength = 1f;
     [SerializeField] GameObject deathEffect;
+    [SerializeField] bool hasSpriteRenderer = true;
 
     private SpriteRenderer spriteRenderer;
+    private PlayerMovement playerMovement;
 
     private float invincibleTimer;
     private Coroutine immunityCoroutine;
@@ -23,6 +28,7 @@ public class HealthController : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerMovement = GetComponent<PlayerMovement>();
         currentHealth = maxHealth;
     }
 
@@ -41,7 +47,7 @@ public class HealthController : MonoBehaviour
         UpdateTimers();
     }
 
-    public virtual void TakeDamage(int amount = 1)
+    public virtual void TakeDamage(int amount = 1, bool knockBack = false)
     {
         if (invincibleTimer > 0) return;
 
@@ -50,6 +56,11 @@ public class HealthController : MonoBehaviour
         if (isPlayer)
         {
             UIController.Instance.UpdateHealthDisplay();
+
+            if (knockBack)
+            {
+                playerMovement.KnockBack();
+            }
         }
 
         if (currentHealth <= 0)
@@ -85,6 +96,12 @@ public class HealthController : MonoBehaviour
             GetComponentInParent<EnemyDrop>().CheckDrop();
             AudioManager.Instance.PlaySoundEffect(GameResources.Instance.EnemyExplode);
             gameObject.transform.parent.gameObject.SetActive(false);
+
+            if (isBoss)
+            {
+                Boss boss = GetComponent<Boss>();
+                boss.OnDefeated();
+            }
         }
     }
 
@@ -102,6 +119,8 @@ public class HealthController : MonoBehaviour
 
     private void PostHitImmunity()
     {
+        if (!hasSpriteRenderer) return;
+
         if (immunityCoroutine != null)
             StopCoroutine(immunityCoroutine);
 

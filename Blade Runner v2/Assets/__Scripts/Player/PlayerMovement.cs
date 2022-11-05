@@ -209,9 +209,17 @@ public class PlayerMovement : MonoBehaviour
         animator.SetTrigger("hurt");
     }
 
-    public void Bounce()
+    public void Bounce(float bounce = 0)
     {
-        rb.velocity = new Vector2(rb.velocity.x, bounceForce);
+        if (bounce == 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, bounceForce);
+        }
+        else
+        {
+            rb.velocity = new Vector2(rb.velocity.x, bounce);
+        }
+
         AudioManager.Instance.PlaySoundEffect(GameResources.Instance.PlayerJump);
     }
 

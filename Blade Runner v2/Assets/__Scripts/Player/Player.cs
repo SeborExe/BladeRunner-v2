@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 
     [HideInInspector] public HealthController playerHealth;
     [HideInInspector] public PlayerMovement playerMovement;
+    [HideInInspector] public CharacterController characterController;
 
     private void Awake()
     {
@@ -15,5 +16,6 @@ public class Player : MonoBehaviour
 
         playerHealth = GetComponent<HealthController>();
         playerMovement = GetComponent<PlayerMovement>();
+        characterController = GetComponent<CharacterController>();
     }
 }

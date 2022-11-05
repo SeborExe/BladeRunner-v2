@@ -10,8 +10,7 @@ public class DamagePlayer : MonoBehaviour
     {
         if (collision.TryGetComponent<HealthController>(out HealthController playerHealth) && collision.CompareTag("Player"))
         {
-            playerHealth.TakeDamage(damage);
-            playerHealth.GetComponent<PlayerMovement>().KnockBack();
+            playerHealth.TakeDamage(damage, true);
         } 
     }
 }
