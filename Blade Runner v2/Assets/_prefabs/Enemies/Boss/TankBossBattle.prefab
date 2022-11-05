@@ -274,7 +274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2919172906480112607
 Transform:
   m_ObjectHideFlags: 0
@@ -311,6 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossTransform: {fileID: 2919172906654034508}
   currentBossState: 0
+  timeline: {fileID: 0}
   moveSpeed: 13
   leftPoints:
   - {fileID: 2919172906139316075}
@@ -320,9 +321,9 @@ MonoBehaviour:
   - {fileID: 2919172906368767314}
   - {fileID: 2919172906866820353}
   - {fileID: 2919172905907845949}
-  timeBetweenShots: 2
-  timeBetweenMines: 1
-  firstMineTime: 0.1
+  timeBetweenShots: 2.5
+  timeBetweenMines: 1.5
+  firstMineTime: 0.2
   firePoint: {fileID: 2919172906753384556}
   minePoint: {fileID: 2919172906136141736}
   hurtTime: 0.8
@@ -330,10 +331,10 @@ MonoBehaviour:
   normalBullet: {fileID: 5065745227695156803, guid: 23c3abcb552da2b4cb8da083e0d1637e, type: 3}
   bounceBullet: {fileID: 5065745227695156803, guid: 05e408204be50a545b447049c90455c3, type: 3}
   mine: {fileID: 6683263699222830351, guid: 129b66fb6a792704e80404239077479e, type: 3}
-  chanseToBounceBullet: 40
+  chanseToBounceBullet: 45
   bounceBulletChanceDecrease: 5
   shotSpeedUp: 1.1
-  mineSpeedUp: 1.2
+  mineSpeedUp: 1.1
 --- !u!1 &2919172906654034509
 GameObject:
   m_ObjectHideFlags: 0

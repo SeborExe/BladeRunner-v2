@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class BossTankController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class BossTankController : MonoBehaviour
 
     [SerializeField] Transform bossTransform;
     [SerializeField] bossStates currentBossState;
+    [SerializeField] PlayableDirector timeline;
 
     [Header("Movement")]
     [SerializeField] float moveSpeed = 8f;
@@ -64,15 +66,21 @@ public class BossTankController : MonoBehaviour
 
     private void Start()
     {
-        currentBossState = bossStates.shooting;
+        currentBossState = bossStates.dialogue;
     }
 
     private void Update()
     {
         UpdateBossState();
 
+        if (timeline.state != PlayState.Playing && timeline.gameObject.activeSelf)
+        {
+            currentBossState = bossStates.shooting;
+            timeline.gameObject.SetActive(false);
+        }
+
 #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.P))
         {
             TakeHit();
         }
